@@ -1,0 +1,96 @@
+description: Flutter production-quality breathing app — architecture, BLoC, theme, strings, web
+alwaysApply: true
+---
+
+# Flutter Breathing App Project Rules
+
+## General Principles
+
+- Code must be clean and readable.
+- Prefer simple solutions over complex abstractions.
+- Avoid unnecessary packages.
+- Always support **Flutter Web** compatibility.
+- Use **Feature Driven Clean Architecture**.
+
+## Project Architecture
+
+```
+lib/
+  core/
+    theme/
+    constants/
+    utils/
+  features/
+    splash/
+    breathing_settings/
+    breathing_session/
+    session_completion/
+  shared/widgets/
+```
+
+Each feature may contain: `bloc/`, `presentation/`, `domain/`, `data/`.
+
+Example:
+
+```
+features/breathing_session/
+  bloc/
+    session_bloc.dart
+    session_event.dart
+    session_state.dart
+  presentation/
+    breathing_session_screen.dart
+    widgets/
+      breathing_bubble.dart
+      phase_label.dart
+      session_progress_bar.dart
+```
+
+## State Management
+
+- Use **BLoC** pattern (flutter_bloc).
+- Co-locate bloc, events, and state per feature.
+
+## Coding Rules
+
+- Prefer **StatelessWidget** where possible.
+- Extract reusable widgets; keep build methods clean.
+- Avoid long widgets: **max ~150 lines** per widget file; split into smaller widgets.
+- Use **const** constructors whenever possible.
+- **All string literals** must be used via string constants (e.g. `core/constants/`).
+- **All colors** must be used via theme/color constants (e.g. `AppColors` in `core/theme/`).
+
+## Animation
+
+- Use: `AnimationController`, `AnimatedContainer`, `TweenAnimationBuilder`.
+- Ensure smooth transitions for breathing bubble and phase changes.
+
+## Timer Logic
+
+- Avoid simple periodic timers when possible.
+- Prefer logic synchronized to animation or state updates.
+
+## Web Compatibility
+
+- Avoid platform-specific plugins where possible.
+- Ensure assets work on web.
+- Avoid filesystem access.
+
+## UI
+
+- Follow Figma design exactly; maintain consistent spacing.
+- Use theme constants; support **dark mode**.
+
+## Assets
+
+- Bundle assets locally under: `assets/dark/`, `assets/light/`, `assets/files/`, `assets/fonts/`.
+
+## Documentation
+
+- Add concise inline comments for complex logic.
+
+## Output Style
+
+- Explain before generating large files.
+- Prefer one file at a time.
+- Follow Flutter best practices and SOLID principles.
