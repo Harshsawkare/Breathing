@@ -46,6 +46,9 @@ dependencies:
   # Local persistence (SharedPreferences; maps to localStorage on web)
   shared_preferences: ^2.2.2
 
+  # SVG assets
+  flutter_svg: ^2.0.10+1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -68,13 +71,14 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  # Local assets (images, sounds, lottie, fonts)
+  # Local assets (images, sounds, lottie, fonts, icons)
   assets:
     - assets/app_icon.png
     - assets/dark/
     - assets/light/
     - assets/files/
     - assets/fonts/
+    - assets/icons/
 
   fonts:
     - family: Quicksand

@@ -6,6 +6,8 @@ import 'core/constants/app_strings.dart';
 import 'core/services/preferences_service.dart';
 import 'core/theme/app_theme.dart';
 import 'core/theme/theme_cubit.dart';
+import 'features/breathing_session/bloc/session_bloc.dart';
+import 'features/breathing_session/presentation/breathing_session_screen.dart';
 import 'features/breathing_settings/presentation/pages/breathing_settings_page.dart';
 import 'features/splash/presentation/pages/splash_page.dart';
 
@@ -51,6 +53,10 @@ class NewuBreathingApp extends StatelessWidget {
                 AppStrings.routeSplash: (_) => const SplashPage(),
                 AppStrings.routeSettings: (_) =>
                     const BreathingSettingsPage(),
+                AppStrings.routeSession: (_) => BlocProvider(
+                    create: (_) => SessionBloc(),
+                    child: const BreathingSessionScreen(),
+                  ),
               },
             );
           },

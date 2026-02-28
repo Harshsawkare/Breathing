@@ -9,6 +9,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/theme_cubit.dart';
 import '../../../../shared/widgets/primary_button.dart';
 import '../../../../shared/widgets/selectable_chip.dart';
+import '../../../breathing_session/session_config.dart';
 import '../../domain/models/breath_phase.dart';
 import '../../domain/models/round_preset.dart';
 import '../bloc/breathing_settings_bloc.dart';
@@ -85,6 +86,30 @@ class _BreathingSettingsView extends StatelessWidget {
                           ),
                           const SizedBox(height: 24),
                           const _SettingsCard(),
+                          const SizedBox(height: 24),
+                          BlocBuilder<
+                            BreathingSettingsBloc,
+                            BreathingSettingsState
+                          >(
+                            buildWhen: (prev, curr) =>
+                                prev.phaseDurations != curr.phaseDurations ||
+                                prev.roundPreset != curr.roundPreset,
+                            builder: (context, state) {
+                              return PrimaryButton(
+                                label: AppStrings.settingsStartBreathing,
+                                onPressed: () {
+                                  Navigator.of(context).pushNamed(
+                                    AppStrings.routeSession,
+                                    arguments: SessionConfig(
+                                      phaseDurations: state.phaseDurations,
+                                      roundPreset: state.roundPreset,
+                                      soundOn: state.soundOn,
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                          ),
                         ],
                       ),
                     ),
@@ -175,13 +200,6 @@ class _SettingsCard extends StatelessWidget {
           const _AdvancedTimingSection(),
           const SizedBox(height: 20),
           const _SoundSection(),
-          const SizedBox(height: 24),
-          PrimaryButton(
-            label: AppStrings.settingsStartBreathing,
-            onPressed: () {
-              // TODO: Navigate to session screen when implemented.
-            },
-          ),
         ],
       ),
     );
@@ -243,7 +261,8 @@ class _BreathDurationSection extends StatelessWidget {
         const SizedBox(height: 12),
         BlocBuilder<BreathingSettingsBloc, BreathingSettingsState>(
           buildWhen: (prev, curr) =>
-              prev.simpleBreathDurationSeconds != curr.simpleBreathDurationSeconds ||
+              prev.simpleBreathDurationSeconds !=
+                  curr.simpleBreathDurationSeconds ||
               prev.phaseDurations != curr.phaseDurations,
           builder: (context, state) {
             const options = [3, 4, 5, 6];
@@ -258,8 +277,10 @@ class _BreathDurationSection extends StatelessWidget {
                     if (i > 0) const SizedBox(width: 8),
                     SelectableChip(
                       label: AppStrings.secondsLabel(options[i]),
-                      selected: allPhasesEqualOneValue &&
-                          state.phaseDurations[BreathPhase.breatheIn] == options[i],
+                      selected:
+                          allPhasesEqualOneValue &&
+                          state.phaseDurations[BreathPhase.breatheIn] ==
+                              options[i],
                       onTap: () {
                         context.read<BreathingSettingsBloc>().add(
                           BreathDurationSelected(options[i]),
@@ -536,6 +557,14 @@ class _SoundSection extends StatelessWidget {
             ),
             Switch(
               value: state.soundOn,
+              activeThumbColor: AppColors.lightActiveToggleThumb,
+              activeTrackColor: theme.brightness == Brightness.dark
+                  ? AppColors.darkActiveTrack
+                  : AppColors.lightActiveTrack,
+              inactiveThumbColor: AppColors.darkActiveToggleThumb,
+              inactiveTrackColor: theme.brightness == Brightness.dark
+                  ? AppColors.darkInActiveTrack
+                  : AppColors.lightInActiveTrack,
               onChanged: (value) {
                 context.read<BreathingSettingsBloc>().add(SoundToggled(value));
               },

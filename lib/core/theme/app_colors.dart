@@ -45,8 +45,11 @@ class AppColors {
   static const lightUnselectedChipText = Color(0xFF737373);
   static const darkUnselectedChipText = Color(0xFFA3A3A3);
 
-  static const lightActiveToggleBg = Color(0xFF630068);
-  static const darkActiveToggleBg = Color(0xFF424242);
+  static const lightInActiveTrack = Color(0xFFC1C1C1);
+  static const darkInActiveTrack = Color(0xFF424242);
+
+  static const lightActiveTrack = Color(0xFF630068);
+  static const darkActiveTrack = Color(0xFF823386);
 
   static const lightActiveToggleThumb = Color(0xFFFFFFFF);
   static const darkActiveToggleThumb = Color(0xFF737373);
@@ -54,7 +57,10 @@ class AppColors {
   static const lightButtonBg = Color(0xFF630068);
   static const darkButtonBg = Color(0xFF823386);
 
-  static const lightButtonText = Color(0xFFFFFFFF);
+  static const lightPlayPauseButtonBg = Color(0xFFEFE6F0);
+  static const darkPlayPauseButtonBg = Color(0xFF823386);
+
+  static const lightButtonText = Color(0xFF28002A);
   static const darkButtonText = Color(0xFFFFFFFF);
 
   static const lightIncrementButtonFg = Color(0xFF141414);
@@ -63,8 +69,12 @@ class AppColors {
   static const lightIncrementButtonBg = Color(0xFFFFFFFF);
   static const darkIncrementButtonBg = Color(0xFF424242);
 
-  static const lightProgressBg = Color(0xFFEFE6F0);
-  static const darkProgressBg = Color(0xFF28002A);
+  static const lightprogressBg = Color(0xFFEFE6F0);
+  static const darkprogressBg = Color(0xFF28002A);
+
+  /// Session progress bar fill gradient (orange → purple).
+  static const progressFill1 = Color(0xFFFF8A00);
+  static const progressFill2 = Color(0xFF6C0862);
 
   static const lightGradientStart = Color(0x337B2D8E); // #7B2D8E33
   static const lightGradientEnd = Color(0x0D7B2D8E); // #7B2D8E0D
