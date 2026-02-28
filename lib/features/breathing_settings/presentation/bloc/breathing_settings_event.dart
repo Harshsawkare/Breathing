@@ -10,6 +10,10 @@ abstract class BreathingSettingsEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+class LoadSettings extends BreathingSettingsEvent {
+  const LoadSettings();
+}
+
 class BreathDurationSelected extends BreathingSettingsEvent {
   const BreathDurationSelected(this.seconds);
 
@@ -57,6 +61,15 @@ class PhaseDurationDecremented extends BreathingSettingsEvent {
 
 class SoundToggled extends BreathingSettingsEvent {
   const SoundToggled(this.enabled);
+
+  final bool enabled;
+
+  @override
+  List<Object?> get props => [enabled];
+}
+
+class DarkModeToggled extends BreathingSettingsEvent {
+  const DarkModeToggled(this.enabled);
 
   final bool enabled;
 

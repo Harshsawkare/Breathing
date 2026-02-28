@@ -43,6 +43,9 @@ dependencies:
   # Audio playback (supports web)
   audioplayers: ^5.2.1
 
+  # Local persistence (SharedPreferences; maps to localStorage on web)
+  shared_preferences: ^2.2.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

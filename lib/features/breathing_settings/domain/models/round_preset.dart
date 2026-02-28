@@ -4,12 +4,8 @@ enum RoundPreset {
   deep6(cycles: 6, label: '6 deep'),
   zen8(cycles: 8, label: '8 zen');
 
-  const RoundPreset({
-    required this.cycles,
-    required this.label,
-  });
+  const RoundPreset({required this.cycles, required this.label});
 
   final int cycles;
   final String label;
 }
-

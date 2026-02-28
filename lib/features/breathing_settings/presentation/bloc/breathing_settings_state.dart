@@ -10,6 +10,7 @@ class BreathingSettingsState extends Equatable {
     required this.isAdvancedOpen,
     required this.phaseDurations,
     required this.soundOn,
+    required this.darkModeEnabled,
   });
 
   factory BreathingSettingsState.initial() {
@@ -24,6 +25,7 @@ class BreathingSettingsState extends Equatable {
       isAdvancedOpen: false,
       phaseDurations: defaultDurations,
       soundOn: true,
+      darkModeEnabled: false,
     );
   }
 
@@ -32,6 +34,7 @@ class BreathingSettingsState extends Equatable {
   final bool isAdvancedOpen;
   final Map<BreathPhase, int> phaseDurations;
   final bool soundOn;
+  final bool darkModeEnabled;
 
   BreathingSettingsState copyWith({
     int? simpleBreathDurationSeconds,
@@ -39,6 +42,7 @@ class BreathingSettingsState extends Equatable {
     bool? isAdvancedOpen,
     Map<BreathPhase, int>? phaseDurations,
     bool? soundOn,
+    bool? darkModeEnabled,
   }) {
     return BreathingSettingsState(
       simpleBreathDurationSeconds:
@@ -47,6 +51,7 @@ class BreathingSettingsState extends Equatable {
       isAdvancedOpen: isAdvancedOpen ?? this.isAdvancedOpen,
       phaseDurations: phaseDurations ?? this.phaseDurations,
       soundOn: soundOn ?? this.soundOn,
+      darkModeEnabled: darkModeEnabled ?? this.darkModeEnabled,
     );
   }
 
@@ -57,6 +62,7 @@ class BreathingSettingsState extends Equatable {
         isAdvancedOpen,
         phaseDurations,
         soundOn,
+        darkModeEnabled,
       ];
 }
 

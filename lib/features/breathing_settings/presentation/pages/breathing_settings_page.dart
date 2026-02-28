@@ -4,6 +4,7 @@ import 'package:newu_breathing/core/theme/app_typography.dart';
 
 import '../../../../core/constants/app_assets.dart';
 import '../../../../core/constants/app_strings.dart';
+import '../../../../core/services/preferences_service.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/theme_cubit.dart';
 import '../../../../shared/widgets/primary_button.dart';
@@ -22,7 +23,10 @@ class BreathingSettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => BreathingSettingsBloc(),
+      create: (context) {
+        final preferences = context.read<PreferencesService>();
+        return BreathingSettingsBloc(preferences)..add(const LoadSettings());
+      },
       child: const _BreathingSettingsView(),
     );
   }
@@ -102,29 +106,40 @@ class _HeaderRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        GestureDetector(
-          onTap: () => context.read<ThemeCubit>().toggle(),
-          child: Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: isDark
-                  ? AppColors.darkThemeIconBg
-                  : AppColors.lightThemeIconBg,
-              shape: BoxShape.circle,
+    return BlocBuilder<BreathingSettingsBloc, BreathingSettingsState>(
+      buildWhen: (prev, curr) => prev.darkModeEnabled != curr.darkModeEnabled,
+      builder: (context, state) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            GestureDetector(
+              onTap: () {
+                final newDark = !state.darkModeEnabled;
+                context.read<BreathingSettingsBloc>().add(
+                  DarkModeToggled(newDark),
+                );
+                context.read<ThemeCubit>().setDark(newDark);
+              },
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: isDark
+                      ? AppColors.darkThemeIconBg
+                      : AppColors.lightThemeIconBg,
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  isDark ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
+                  size: 20,
+                  color: isDark
+                      ? AppColors.darkThemeIcon
+                      : AppColors.lightThemeIcon,
+                ),
+              ),
             ),
-            child: Icon(
-              isDark ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
-              size: 20,
-              color: isDark
-                  ? AppColors.darkThemeIcon
-                  : AppColors.lightThemeIcon,
-            ),
-          ),
-        ),
-      ],
+          ],
+        );
+      },
     );
   }
 }
@@ -228,10 +243,12 @@ class _BreathDurationSection extends StatelessWidget {
         const SizedBox(height: 12),
         BlocBuilder<BreathingSettingsBloc, BreathingSettingsState>(
           buildWhen: (prev, curr) =>
-              prev.simpleBreathDurationSeconds !=
-              curr.simpleBreathDurationSeconds,
+              prev.simpleBreathDurationSeconds != curr.simpleBreathDurationSeconds ||
+              prev.phaseDurations != curr.phaseDurations,
           builder: (context, state) {
             const options = [3, 4, 5, 6];
+            final phaseValues = state.phaseDurations.values.toSet();
+            final allPhasesEqualOneValue = phaseValues.length == 1;
             return SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
@@ -241,7 +258,8 @@ class _BreathDurationSection extends StatelessWidget {
                     if (i > 0) const SizedBox(width: 8),
                     SelectableChip(
                       label: AppStrings.secondsLabel(options[i]),
-                      selected: state.simpleBreathDurationSeconds == options[i],
+                      selected: allPhasesEqualOneValue &&
+                          state.phaseDurations[BreathPhase.breatheIn] == options[i],
                       onTap: () {
                         context.read<BreathingSettingsBloc>().add(
                           BreathDurationSelected(options[i]),
