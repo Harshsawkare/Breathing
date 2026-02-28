@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/constants/app_assets.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../shared/widgets/background_with_overlays.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -41,15 +42,8 @@ class _SplashPageState extends State<SplashPage> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-              isDark ? AppAssets.backgroundDark : AppAssets.backgroundLight,
-            ),
-            fit: BoxFit.cover,
-          ),
-        ),
+      body: BackgroundWithOverlays(
+        isDark: isDark,
         child: Center(
           // App icon and title centered on gradient background.
           child: Column(

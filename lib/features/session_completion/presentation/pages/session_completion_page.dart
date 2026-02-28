@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:newu_breathing/core/constants/app_assets.dart';
 import 'package:newu_breathing/core/constants/app_strings.dart';
@@ -8,8 +9,8 @@ import 'package:newu_breathing/core/theme/app_typography.dart';
 import 'package:newu_breathing/core/theme/theme_cubit.dart';
 import 'package:newu_breathing/core/services/preferences_service.dart';
 import 'package:newu_breathing/features/breathing_session/session_config.dart';
+import 'package:newu_breathing/shared/widgets/background_with_overlays.dart';
 import 'package:newu_breathing/shared/widgets/primary_button.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// Shown when a breathing session completes. Displays success animation,
 /// message, and actions to start again or return home.
@@ -26,15 +27,8 @@ class SessionCompletionPage extends StatelessWidget {
     final config = ModalRoute.of(context)?.settings.arguments as SessionConfig?;
 
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-              isDark ? AppAssets.backgroundDark : AppAssets.backgroundLight,
-            ),
-            fit: BoxFit.cover,
-          ),
-        ),
+      body: BackgroundWithOverlays(
+        isDark: isDark,
         child: SafeArea(
           child: _wrapForWeb(
             child: Padding(

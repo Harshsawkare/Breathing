@@ -12,6 +12,7 @@ import '../../../core/constants/app_strings.dart';
 import '../../../core/services/preferences_service.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/theme_cubit.dart';
+import '../../../shared/widgets/background_with_overlays.dart';
 import '../../breathing_settings/domain/models/breath_phase.dart';
 import '../bloc/session_bloc.dart';
 import '../bloc/session_event.dart';
@@ -119,15 +120,8 @@ class _BreathingSessionScreenState extends State<BreathingSessionScreen> {
     final isDark = theme.brightness == Brightness.dark;
 
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-              isDark ? AppAssets.backgroundDark : AppAssets.backgroundLight,
-            ),
-            fit: BoxFit.cover,
-          ),
-        ),
+      body: BackgroundWithOverlays(
+        isDark: isDark,
         child: SafeArea(
           child: _wrapForWeb(
             child: BlocBuilder<SessionBloc, SessionState>(

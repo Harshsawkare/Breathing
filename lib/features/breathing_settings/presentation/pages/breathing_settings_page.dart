@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:newu_breathing/core/theme/app_typography.dart';
 
-import '../../../../core/constants/app_assets.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/services/preferences_service.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/theme_cubit.dart';
+import '../../../../shared/widgets/background_with_overlays.dart';
 import '../../../../shared/widgets/primary_button.dart';
 import '../../../../shared/widgets/selectable_chip.dart';
 import '../../../breathing_session/session_config.dart';
@@ -43,15 +43,8 @@ class _BreathingSettingsView extends StatelessWidget {
     final isDark = theme.brightness == Brightness.dark;
 
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-              isDark ? AppAssets.backgroundDark : AppAssets.backgroundLight,
-            ),
-            fit: BoxFit.cover,
-          ),
-        ),
+      body: BackgroundWithOverlays(
+        isDark: isDark,
         child: SafeArea(
           child: LayoutBuilder(
             builder: (context, constraints) {

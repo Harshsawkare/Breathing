@@ -106,6 +106,22 @@ class AppColors {
   static const lightBubbleIcon = Color(0xFFFFFFFF);
   static const darkBubbleIcon = Color(0xFFFFFFFF);
 
-  static const lightCard = Color.fromARGB(225, 255, 255, 255);
+  static const lightCard = Color.fromARGB(160, 255, 255, 255);
   static const darkCard = Color.fromARGB(18, 255, 255, 255);
+
+  /// Web-only full-screen background gradient (topCenter → bottomCenter).
+  /// Light: #630068 → #FF8A00
+  static const webBackgroundGradientLight = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [Color(0x28630068), Color(0x28FF8800)],
+  );
+
+  /// Web-only full-screen background gradient (topCenter → bottomCenter).
+  /// Dark: #1A1128 → #2D1B4E → #3A2260
+  static const webBackgroundGradientDark = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [Color(0xFF1A1128), Color(0xFF2D1B4E), Color(0xFF3A2260)],
+  );
 }
