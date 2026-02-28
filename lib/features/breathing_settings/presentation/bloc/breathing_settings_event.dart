@@ -10,6 +10,7 @@ abstract class BreathingSettingsEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+/// Load settings from PreferencesService into state.
 class LoadSettings extends BreathingSettingsEvent {
   const LoadSettings();
 }

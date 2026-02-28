@@ -92,6 +92,7 @@ class PreferencesService {
     return _prefs.setBool(PreferenceKeys.advancedTimingEnabled, value);
   }
 
+  /// Reads a single phase duration (3–6s); used for advanced timing.
   int _getPhaseSeconds(String key) =>
       _prefs.getInt(key) ?? PreferenceDefaults.phaseSeconds;
 

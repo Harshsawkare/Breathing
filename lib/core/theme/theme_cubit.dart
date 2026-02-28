@@ -1,7 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+/// Holds dark-mode flag; false = light, true = dark.
 class ThemeCubit extends Cubit<bool> {
-  ThemeCubit([super.initialValue = false]); // false = light, true = dark
+  ThemeCubit([super.initialValue = false]);
 
   void toggle() => emit(!state);
 

@@ -11,5 +11,6 @@ class SessionConfig {
 
   final Map<BreathPhase, int> phaseDurations;
   final RoundPreset roundPreset;
-  final bool soundOn; // Whether to play chime on phase change.
+  /// Whether to play the chime when the phase changes.
+  final bool soundOn;
 }

@@ -21,6 +21,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
+    // Brief delay then navigate to settings (home).
     _timer = Timer(const Duration(milliseconds: 2200), _goToSettings);
   }
 
@@ -50,6 +51,7 @@ class _SplashPageState extends State<SplashPage> {
           ),
         ),
         child: Center(
+          // App icon and title centered on gradient background.
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

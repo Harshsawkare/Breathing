@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
 
+/// Pill-style chip for single choice (e.g. round presets, breath duration). Optional subtitle.
 class SelectableChip extends StatelessWidget {
   const SelectableChip({
     super.key,

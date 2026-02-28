@@ -123,6 +123,7 @@ class AppTypographyExtension extends ThemeExtension<AppTypographyExtension> {
     covariant ThemeExtension<AppTypographyExtension>? other,
     double t,
   ) {
+    // No animation; just switch at t >= 0.5.
     if (other is! AppTypographyExtension) return this;
     return AppTypographyExtension(
       isWeb: other.isWeb,

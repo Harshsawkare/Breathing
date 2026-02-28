@@ -9,11 +9,12 @@ import 'core/theme/theme_cubit.dart';
 import 'features/breathing_session/bloc/session_bloc.dart';
 import 'features/breathing_session/presentation/breathing_session_screen.dart';
 import 'features/breathing_settings/presentation/pages/breathing_settings_page.dart';
+import 'features/session_completion/presentation/pages/session_completion_page.dart';
 import 'features/splash/presentation/pages/splash_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  // Load persisted preferences before building the app.
   final prefs = await SharedPreferences.getInstance();
   final preferencesService = PreferencesService(prefs);
   final initialDarkMode = preferencesService.darkModeEnabled;
@@ -36,6 +37,7 @@ class NewuBreathingApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Provide preferences and theme to the subtree; theme drives light/dark.
     return RepositoryProvider<PreferencesService>.value(
       value: preferencesService,
       child: BlocProvider(
@@ -53,10 +55,13 @@ class NewuBreathingApp extends StatelessWidget {
                 AppStrings.routeSplash: (_) => const SplashPage(),
                 AppStrings.routeSettings: (_) =>
                     const BreathingSettingsPage(),
+                // Session gets its own bloc so each run starts fresh.
                 AppStrings.routeSession: (_) => BlocProvider(
                     create: (_) => SessionBloc(),
                     child: const BreathingSessionScreen(),
                   ),
+                AppStrings.routeCompletion: (_) =>
+                    const SessionCompletionPage(),
               },
             );
           },

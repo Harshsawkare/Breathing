@@ -43,6 +43,7 @@ class _BreathingSessionScreenState extends State<BreathingSessionScreen> {
     super.didChangeDependencies();
     final bloc = context.read<SessionBloc>();
     if (_subscription == null) {
+      // Start session from route arguments and subscribe to state.
       final config = _sessionConfig;
       if (config != null) {
         _soundOn = config.soundOn;
@@ -67,6 +68,7 @@ class _BreathingSessionScreenState extends State<BreathingSessionScreen> {
   void _playChime() {
     if (!_soundOn || !mounted) return;
     _chimePlayer ??= AudioPlayer();
+    // AssetSource expects path without leading "assets/".
     final path = AppAssets.chimeSound.replaceFirst('assets/', '');
     _chimePlayer!.play(AssetSource(path));
   }
@@ -131,10 +133,18 @@ class _BreathingSessionScreenState extends State<BreathingSessionScreen> {
             child: BlocBuilder<SessionBloc, SessionState>(
               builder: (context, state) {
                 if (state.isCompleted) {
-                  // Close bloc and pop back to settings on completion.
+                  // Navigate to completion screen, then pop this session.
+                  // Do not dispatch SessionClosed() here — it resets state to initial
+                  // and causes the UI to show "Get ready" again instead of navigating.
+                  context.read<SessionBloc>().add(const SessionClosed());
                   WidgetsBinding.instance.addPostFrameCallback((_) {
-                    context.read<SessionBloc>().add(const SessionClosed());
-                    if (context.mounted) Navigator.of(context).pop();
+                    final config = _sessionConfig;
+                    if (context.mounted) {
+                      Navigator.of(context).pushReplacementNamed(
+                        AppStrings.routeCompletion,
+                        arguments: config,
+                      );
+                    }
                   });
                   return const SizedBox.shrink();
                 }
@@ -154,6 +164,7 @@ class _BreathingSessionScreenState extends State<BreathingSessionScreen> {
     );
   }
 
+  /// User tapped close; reset bloc and return to previous screen.
   void _onClose() {
     context.read<SessionBloc>().add(const SessionClosed());
     Navigator.of(context).pop();
@@ -173,6 +184,7 @@ class _BreathingSessionScreenState extends State<BreathingSessionScreen> {
     context.read<SessionBloc>().add(const SessionResumed());
   }
 
+  /// Constrain width on web for a mobile-like layout.
   Widget _wrapForWeb({required Widget child}) {
     if (!kIsWeb) return child;
     return Center(

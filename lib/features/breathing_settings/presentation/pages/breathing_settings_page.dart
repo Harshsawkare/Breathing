@@ -26,6 +26,7 @@ class BreathingSettingsPage extends StatelessWidget {
     return BlocProvider(
       create: (context) {
         final preferences = context.read<PreferencesService>();
+        // Load persisted settings on first build.
         return BreathingSettingsBloc(preferences)..add(const LoadSettings());
       },
       child: const _BreathingSettingsView(),
@@ -55,6 +56,7 @@ class _BreathingSettingsView extends StatelessWidget {
           child: LayoutBuilder(
             builder: (context, constraints) {
               final maxWidth = constraints.maxWidth;
+              // Cap content width on large screens for readability.
               final contentWidth = maxWidth < 600 ? maxWidth : 480.0;
 
               return Align(
@@ -98,6 +100,7 @@ class _BreathingSettingsView extends StatelessWidget {
                               return PrimaryButton(
                                 label: AppStrings.settingsStartBreathing,
                                 onPressed: () {
+                                  // Pass current config so session and completion can reuse it.
                                   Navigator.of(context).pushNamed(
                                     AppStrings.routeSession,
                                     arguments: SessionConfig(

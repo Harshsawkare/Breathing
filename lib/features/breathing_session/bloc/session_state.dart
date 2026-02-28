@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import '../../breathing_settings/domain/models/breath_phase.dart';
 
+/// Lifecycle of a single breathing session.
 enum SessionStatus { preparing, active, paused, completed }
 
 class SessionState extends Equatable {

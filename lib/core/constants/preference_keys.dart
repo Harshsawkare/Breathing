@@ -7,6 +7,7 @@ abstract final class PreferenceKeys {
   static const String rounds = 'rounds';
   static const String soundEnabled = 'sound_enabled';
   static const String darkMode = 'dark_mode';
+  // Advanced timing: per-phase durations (3–6s each).
   static const String advancedTimingEnabled = 'advanced_timing_enabled';
   static const String advancedBreatheIn = 'advanced_breathe_in';
   static const String advancedHoldIn = 'advanced_hold_in';

@@ -15,6 +15,7 @@ class BreathingSettingsState extends Equatable {
 
   factory BreathingSettingsState.initial() {
     const baseDuration = 4;
+    // All phases start at 4s when advanced timing is off.
     final defaultDurations = {
       for (final phase in BreathPhase.values) phase: baseDuration,
     };

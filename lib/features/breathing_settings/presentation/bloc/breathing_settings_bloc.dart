@@ -20,6 +20,7 @@ class BreathingSettingsBloc
 
   final PreferencesService _preferences;
 
+  /// Load all settings from persistence into state.
   Future<void> _onLoadSettings(
     LoadSettings event,
     Emitter<BreathingSettingsState> emit,
@@ -71,6 +72,7 @@ class BreathingSettingsBloc
     emit(state.copyWith(roundPreset: event.preset));
   }
 
+  /// When closing advanced timing, reset all phases to simple breath duration.
   Future<void> _onAdvancedTimingToggled(
     AdvancedTimingToggled event,
     Emitter<BreathingSettingsState> emit,

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+/// Central color palette for light and dark themes.
 class AppColors {
   AppColors._();
 
+  // Headings and body text
   static const lightHeading = Color(0xFF630068);
   static const darkHeading = Color(0xFFFFFFFF);
 
@@ -15,6 +17,10 @@ class AppColors {
   static const lightSubtitle = Color(0xFF737373);
   static const darkSubtitle = Color(0xFFA3A3A3);
 
+  static const lightBackToHome = Color(0xFF630068);
+  static const darkBackToHome = Color(0xFFFFFFFF);
+
+  // Theme toggle and icon backgrounds
   static const lightThemeIcon = Color(0xFF000000);
   static const darkThemeIcon = Color(0xFFFFFFFF);
 
@@ -45,6 +51,7 @@ class AppColors {
   static const lightUnselectedChipText = Color(0xFF737373);
   static const darkUnselectedChipText = Color(0xFFA3A3A3);
 
+  // Sliders and toggles
   static const lightInActiveTrack = Color(0xFFC1C1C1);
   static const darkInActiveTrack = Color(0xFF424242);
 
@@ -63,6 +70,7 @@ class AppColors {
   static const lightButtonText = Color(0xFF28002A);
   static const darkButtonText = Color(0xFFFFFFFF);
 
+  // Increment/decrement controls (e.g. phase duration)
   static const lightIncrementButtonFg = Color(0xFF141414);
   static const darkIncrementButtonFg = Color(0xFFFFFFFF);
 

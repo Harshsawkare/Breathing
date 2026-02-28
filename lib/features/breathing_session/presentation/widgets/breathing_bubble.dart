@@ -7,8 +7,8 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../breathing_settings/domain/models/breath_phase.dart';
 
-/// Central circle: animates size by phase (90px hold, 90→120 breathe in, 120→90 breathe out);
-/// shows count up (breathe in), count down (breathe out), or nothing (hold).
+/// Central circle: breathe in => expand, breathe out => shrink, hold => same size.
+/// Shows count up (breathe in), count down (breathe out), or nothing (hold).
 class BreathingBubble extends StatefulWidget {
   const BreathingBubble({
     super.key,
@@ -44,16 +44,29 @@ class _BreathingBubbleState extends State<BreathingBubble>
   double _startSizeFactor = 0;
   double _endSizeFactor = 0;
 
-  double _targetSizeFactor(BreathPhase? phase, double progress) {
+  /// Target size factor 0–1: breathe in => expand to 1.0, breathe out => shrink to 0, hold => same size.
+  /// Breathe-in reaches 1.0 on the last tick (we never get progress=1 from bloc, so scale to full).
+  double _targetSizeFactor(
+    BreathPhase? phase,
+    double progress, {
+    int totalSecondsInPhase = 4,
+  }) {
     if (phase == null) return 0.0;
     switch (phase) {
       case BreathPhase.breatheIn:
-        return progress.clamp(0.0, 1.0);
+        if (totalSecondsInPhase <= 1) return progress.clamp(0.0, 1.0);
+        final maxProgress = (totalSecondsInPhase - 1) / totalSecondsInPhase;
+        if (maxProgress <= 0) return 1.0;
+        return (progress / maxProgress).clamp(0.0, 1.0);
       case BreathPhase.breatheOut:
-        return (1.0 - progress).clamp(0.0, 1.0);
+        if (totalSecondsInPhase <= 1) return (1.0 - progress).clamp(0.0, 1.0);
+        final maxProgress = (totalSecondsInPhase - 1) / totalSecondsInPhase;
+        if (maxProgress <= 0) return 0.0;
+        return (1.0 - progress / maxProgress).clamp(0.0, 1.0);
       case BreathPhase.holdIn:
+        return 1.0; // keep fully expanded
       case BreathPhase.holdOut:
-        return 0.0;
+        return 0.0; // keep fully shrunk
     }
   }
 
@@ -73,6 +86,7 @@ class _BreathingBubbleState extends State<BreathingBubble>
       _endSizeFactor = _targetSizeFactor(
         widget.currentPhase,
         widget.phaseProgress,
+        totalSecondsInPhase: widget.totalSecondsInPhase,
       );
       _startSizeFactor = _endSizeFactor;
     }
@@ -82,14 +96,17 @@ class _BreathingBubbleState extends State<BreathingBubble>
   void didUpdateWidget(BreathingBubble oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.isPreparing) return;
-
+    // Animate toward new target when phase or progress changes.
     final newTarget = _targetSizeFactor(
       widget.currentPhase,
       widget.phaseProgress,
+      totalSecondsInPhase: widget.totalSecondsInPhase,
     );
-    if (newTarget == _endSizeFactor) return;
+    // Use current visual size as start so we never jump or shrink at phase boundaries.
+    final currentFactor = _animatedSizeFactor;
+    if ((newTarget - currentFactor).abs() < 0.001) return;
 
-    _startSizeFactor = _endSizeFactor;
+    _startSizeFactor = currentFactor;
     _endSizeFactor = newTarget;
     _controller.forward(from: 0);
   }

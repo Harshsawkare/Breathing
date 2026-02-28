@@ -79,6 +79,7 @@ class _SessionProgressBarState extends State<SessionProgressBar>
 
     if (widget.isPaused) {
       if (!oldWidget.isPaused) {
+        // Freeze progress at current value when session is paused.
         _controller.stop();
         final current =
             lerpDouble(_startProgress, _targetProgress, _controller.value) ??

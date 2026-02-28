@@ -1,3 +1,4 @@
+/// Number of full box cycles per session (2, 4, 6, or 8).
 enum RoundPreset {
   quick2(cycles: 2, label: '2 quick'),
   calm4(cycles: 4, label: '4 calm'),

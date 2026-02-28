@@ -9,6 +9,7 @@ class AppStrings {
   static const String routeSplash = '/';
   static const String routeSettings = '/settings';
   static const String routeSession = '/session';
+  static const String routeCompletion = '/completion';
 
   // Splash
   static const String splashTitle = 'NewU Breathing';
@@ -63,4 +64,11 @@ class AppStrings {
       'Cycle $current of $total';
   static const String sessionPause = 'Pause';
   static const String sessionResume = 'Resume';
+
+  // Session completion
+  static const String completionYouDidIt = 'You did it!';
+  static const String completionMessage =
+      'Great rounds of calm, just like that. Your mind thanks you.';
+  static const String completionStartAgain = 'Start again';
+  static const String completionBackToHome = 'Back to home';
 }

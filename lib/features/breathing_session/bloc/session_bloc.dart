@@ -46,6 +46,7 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
     if (state.isPreparing) {
       final next = state.prepareCountdown - 1;
       if (next <= 0) {
+        // Countdown finished; start first breathing phase.
         _startFirstPhase(emit);
       } else {
         emit(state.copyWith(prepareCountdown: next));
@@ -96,6 +97,7 @@ class SessionBloc extends Bloc<SessionEvent, SessionState> {
 
     final nextCycle = state.currentCycle + 1;
     if (nextCycle > state.totalCycles) {
+      // All cycles done; session is complete.
       emit(state.copyWith(status: SessionStatus.completed));
       return;
     }

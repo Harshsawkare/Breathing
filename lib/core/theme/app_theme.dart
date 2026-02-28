@@ -17,6 +17,7 @@ class AppTheme {
     return _buildTheme(isDark: true);
   }
 
+  /// Builds light or dark theme with app typography and colors.
   static ThemeData _buildTheme({required bool isDark}) {
     final base =
         isDark ? ThemeData.dark(useMaterial3: true) : ThemeData.light(useMaterial3: true);
