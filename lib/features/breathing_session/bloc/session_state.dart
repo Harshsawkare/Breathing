@@ -59,6 +59,24 @@ class SessionState extends Equatable {
           ? 1.0 - (secondsRemainingInPhase / totalSecondsInPhase)
           : 0.0;
 
+  /// Progress across the full 4-phase cycle (0.0 to 1.0).
+  /// Each phase contributes an equal 25%:
+  /// - breathe in:   0.00 → 0.25
+  /// - hold in:      0.25 → 0.50
+  /// - breathe out:  0.50 → 0.75
+  /// - hold out:     0.75 → 1.00
+  double get cycleProgress {
+    final phase = currentPhase;
+    if (phase == null) return 0.0;
+
+    final index = phaseOrder.indexOf(phase);
+    if (index < 0) return 0.0;
+
+    final clampedPhaseProgress = phaseProgress.clamp(0.0, 1.0);
+
+    return ((index + clampedPhaseProgress) / phaseOrder.length).clamp(0.0, 1.0);
+  }
+
   SessionState copyWith({
     SessionStatus? status,
     int? prepareCountdown,

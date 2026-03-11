@@ -272,9 +272,7 @@ class _SessionContent extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: SessionProgressBar(
-                    progress: state.phaseProgress,
-                    totalSecondsInPhase: state.totalSecondsInPhase,
-                    currentPhase: state.currentPhase,
+                    progress: state.cycleProgress,
                     isDark: isDark,
                     isPaused: state.isPaused,
                   ),

@@ -3,26 +3,21 @@ import 'dart:ui' show lerpDouble;
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
-import '../../../breathing_settings/domain/models/breath_phase.dart';
-
 /// Horizontal bar showing progress within the current phase (0.0–1.0).
 /// Progress animates smoothly toward the target over each second (no jump).
-/// Uses [totalSecondsInPhase] so the bar reaches 1.0 in the last second (bloc never emits 1.0).
-/// In hold phases the bar animates back to 0 and remains at zero.
+/// Represents progress across the whole 4‑phase cycle:
+/// each phase advances the bar by the next 25%, creating a single
+/// continuous motion from 0% (start of phase 1) to 100% (end of phase 4).
 /// Pauses and resumes with the session (freezes animation when paused).
 class SessionProgressBar extends StatefulWidget {
   const SessionProgressBar({
     super.key,
     required this.progress,
-    required this.totalSecondsInPhase,
-    required this.currentPhase,
     required this.isDark,
     this.isPaused = false,
   });
 
   final double progress;
-  final int totalSecondsInPhase;
-  final BreathPhase? currentPhase;
   final bool isDark;
   final bool isPaused;
 
@@ -47,35 +42,14 @@ class _SessionProgressBarState extends State<SessionProgressBar>
               _startProgress = _targetProgress;
             }
           });
-    _targetProgress = _effectiveTarget(
-      widget.progress,
-      widget.totalSecondsInPhase,
-      widget.currentPhase,
-    );
+    _targetProgress = widget.progress.clamp(0.0, 1.0);
     _startProgress = _targetProgress;
-  }
-
-  /// Bloc never emits progress 1.0 (it advances phase immediately). In the last second
-  /// we animate toward 1.0 so the bar completes the track. In hold phases we target 0.
-  double _effectiveTarget(double progress, int totalSeconds, BreathPhase? phase) {
-    if (phase == BreathPhase.holdIn || phase == BreathPhase.holdOut) {
-      return 0.0;
-    }
-    final p = progress.clamp(0.0, 1.0);
-    if (totalSeconds <= 0) return p;
-    final oneStep = 1.0 / totalSeconds;
-    if (p >= 1.0 - oneStep - 0.001) return 1.0;
-    return p;
   }
 
   @override
   void didUpdateWidget(SessionProgressBar oldWidget) {
     super.didUpdateWidget(oldWidget);
-    final newTarget = _effectiveTarget(
-      widget.progress,
-      widget.totalSecondsInPhase,
-      widget.currentPhase,
-    );
+    final newTarget = widget.progress.clamp(0.0, 1.0);
 
     if (widget.isPaused) {
       if (!oldWidget.isPaused) {
