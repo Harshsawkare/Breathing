@@ -13,16 +13,6 @@ The app guides users through configurable breathing cycles (breathe in → hold 
 
 ---
 
-## Screenshots
-
-<!-- Add screenshots: Splash, Settings, Session, Completion -->
-| Splash | Settings | Session | Completion |
-|--------|----------|---------|------------|
-| <img width="1179" height="2556" alt="splash" src="https://github.com/user-attachments/assets/c08325b7-1fbe-4e54-8bc6-de3cebddd12a" /> | <img width="1179" height="2556" alt="settings" src="https://github.com/user-attachments/assets/d8d5e2c4-3be9-41c2-9a0d-79042f66f490" /> | <img width="1179" height="2556" alt="sesssion" src="https://github.com/user-attachments/assets/390c9775-b394-4a06-b9ac-c99cfa269cc7" /> | <img width="1179" height="2556" alt="completion" src="https://github.com/user-attachments/assets/963c65ae-c3ea-44e4-ac53-887cd19001f5" /> |
-
-
----
-
 ## Feature Overview
 
 | Screen | Purpose |
