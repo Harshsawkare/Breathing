@@ -1,4 +1,4 @@
-package com.example.newu_breathing
+package com.example.breathing
 
 import io.flutter.embedding.android.FlutterActivity
 

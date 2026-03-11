@@ -6,20 +6,20 @@
     "configurations": [
 
         {
-            "name": "newu_breathing",
+            "name": "Breathing",
             "request": "launch",
             "type": "dart",
             "program": "lib/main.dart"
         },
         {
-            "name": "newu_breathing (profile mode)",
+            "name": "Breathing (profile mode)",
             "request": "launch",
             "type": "dart",
             "program": "lib/main.dart",
             "flutterMode": "profile"
         },
         {
-            "name": "newu_breathing (release mode)",
+            "name": "Breathing (release mode)",
             "request": "launch",
             "type": "dart",
             "program": "lib/main.dart",

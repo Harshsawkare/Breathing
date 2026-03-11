@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:newu_breathing/core/theme/app_typography.dart';
+import 'package:breathing/core/theme/app_typography.dart';
 
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/services/preferences_service.dart';

@@ -3,7 +3,7 @@ class AppStrings {
   AppStrings._();
 
   // App
-  static const String appTitle = 'NewU Breathing';
+  static const String appTitle = 'Breathing';
 
   // Routes
   static const String routeSplash = '/';
@@ -12,7 +12,7 @@ class AppStrings {
   static const String routeCompletion = '/completion';
 
   // Splash
-  static const String splashTitle = 'NewU Breathing';
+  static const String splashTitle = 'Breathing';
 
   // Breathing settings
   static const String settingsSetYourPace = 'Set your pace';

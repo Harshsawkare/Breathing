@@ -1,35 +1,21 @@
 {
-    "name": "newu_breathing",
-    "short_name": "newu_breathing",
-    "start_url": ".",
-    "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "Breathing app",
-    "orientation": "portrait-primary",
-    "prefer_related_applications": false,
+    "name": "MyWebSite",
+    "short_name": "MySite",
     "icons": [
         {
-            "src": "icons/Icon-192.png",
-            "sizes": "192x192",
-            "type": "image/png"
-        },
-        {
-            "src": "icons/Icon-512.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        },
-        {
-            "src": "icons/Icon-maskable-192.png",
+            "src": "/web-app-manifest-192x192.png",
             "sizes": "192x192",
             "type": "image/png",
             "purpose": "maskable"
         },
         {
-            "src": "icons/Icon-maskable-512.png",
+            "src": "/web-app-manifest-512x512.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "maskable"
         }
-    ]
+    ],
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "display": "standalone"
 }

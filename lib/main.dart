@@ -19,14 +19,14 @@ Future<void> main() async {
   final preferencesService = PreferencesService(prefs);
   final initialDarkMode = preferencesService.darkModeEnabled;
 
-  runApp(NewuBreathingApp(
+  runApp(BreathingApp(
     preferencesService: preferencesService,
     initialDarkMode: initialDarkMode,
   ));
 }
 
-class NewuBreathingApp extends StatelessWidget {
-  const NewuBreathingApp({
+class BreathingApp extends StatelessWidget {
+  const BreathingApp({
     super.key,
     required this.preferencesService,
     required this.initialDarkMode,

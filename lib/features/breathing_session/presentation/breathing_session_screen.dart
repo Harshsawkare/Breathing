@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:newu_breathing/core/theme/app_typography.dart';
+import 'package:breathing/core/theme/app_typography.dart';
 
 import '../../../core/constants/app_assets.dart';
 import '../../../core/constants/app_strings.dart';
