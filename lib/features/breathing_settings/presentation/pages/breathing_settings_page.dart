@@ -553,7 +553,6 @@ class _SoundSection extends StatelessWidget {
             ),
             Switch(
               value: state.soundOn,
-              activeThumbColor: AppColors.lightActiveToggleThumb,
               activeTrackColor: theme.brightness == Brightness.dark
                   ? AppColors.darkActiveTrack
                   : AppColors.lightActiveTrack,
