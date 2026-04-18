@@ -13,23 +13,23 @@ class AppTypography {
   // Subheading: 14 / 16 — Quicksand
   static double subheadingSize(bool isWeb) => isWeb ? 16.0 : 14.0;
 
-  // Title: 15 / 16 — Lato
+  // Title: 15 / 16 — Quicksand
   static double titleSize(bool isWeb) => isWeb ? 16.0 : 15.0;
 
-  // Subtitle: 12 / 16 — Lato
+  // Subtitle: 12 / 16 — Quicksand
   static double subtitleSize(bool isWeb) => isWeb ? 16.0 : 12.0;
 
-  // Chip text: 14 / 14 — Lato
+  // Chip text: 14 / 14 — Quicksand
   static double chipTextSize(bool isWeb) => 14.0;
 
-  // Button text: 16 / 16 — Lato
+  // Button text: 16 / 16 — Quicksand
   static double buttonTextSize(bool isWeb) => 16.0;
 
   // Breathing counter: 36 / 36 — Quicksand (prominent)
   static double breathingCounterSize(bool isWeb) => 36.0;
 
   static const String fontFamilyHeading = 'Quicksand';
-  static const String fontFamilyBody = 'Lato';
+  static const String fontFamilyBody = 'Quicksand';
 }
 
 /// Theme extension that provides app text styles with correct font families

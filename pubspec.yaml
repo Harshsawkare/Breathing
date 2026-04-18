@@ -90,10 +90,3 @@ flutter:
           weight: 600
         - asset: assets/fonts/Quicksand-Bold.ttf
           weight: 700
-    - family: Lato
-      fonts:
-        - asset: assets/fonts/Lato-Regular.ttf
-        - asset: assets/fonts/Lato-Italic.ttf
-          style: italic
-        - asset: assets/fonts/Lato-Bold.ttf
-          weight: 700

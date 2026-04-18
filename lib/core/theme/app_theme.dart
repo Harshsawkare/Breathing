@@ -30,45 +30,39 @@ class AppTheme {
     final subtitleColor =
         isDark ? AppColors.darkSubtitle : AppColors.lightSubtitle;
 
-    final tt = base.textTheme;
-    final textTheme = base.textTheme.copyWith(
+    final tt = base.textTheme.apply(fontFamily: AppTypography.fontFamilyHeading);
+    final textTheme = tt.copyWith(
       // Heading — Quicksand, 24 mobile / 32 web
       headlineMedium: tt.headlineMedium?.copyWith(
-        fontFamily: AppTypography.fontFamilyHeading,
         fontSize: AppTypography.headingSize(isWeb),
         fontWeight: FontWeight.w700,
         color: headingColor,
       ),
       // Subheading — Quicksand, 14 mobile / 16 web
       titleMedium: tt.titleMedium?.copyWith(
-        fontFamily: AppTypography.fontFamilyHeading,
         fontSize: AppTypography.subheadingSize(isWeb),
         fontWeight: FontWeight.w500,
         color: subheadingColor,
       ),
-      // Title — Lato, 15 mobile / 16 web
+      // Title — Quicksand, 15 mobile / 16 web
       titleSmall: tt.titleSmall?.copyWith(
-        fontFamily: AppTypography.fontFamilyBody,
         fontSize: AppTypography.titleSize(isWeb),
         fontWeight: FontWeight.w600,
         color: titleColor,
       ),
-      // Subtitle — Lato, 12 mobile / 16 web
+      // Subtitle — Quicksand, 12 mobile / 16 web
       bodyMedium: tt.bodyMedium?.copyWith(
-        fontFamily: AppTypography.fontFamilyBody,
         fontSize: AppTypography.subtitleSize(isWeb),
         fontWeight: FontWeight.w400,
         color: subtitleColor,
       ),
       bodySmall: tt.bodySmall?.copyWith(
-        fontFamily: AppTypography.fontFamilyBody,
         fontSize: AppTypography.subtitleSize(isWeb),
         fontWeight: FontWeight.w400,
         color: subtitleColor,
       ),
-      // Button text — Lato, 16/16
+      // Button text — Quicksand, 16/16
       labelLarge: tt.labelLarge?.copyWith(
-        fontFamily: AppTypography.fontFamilyBody,
         fontSize: AppTypography.buttonTextSize(isWeb),
         fontWeight: FontWeight.w600,
       ),
@@ -87,6 +81,8 @@ class AppTheme {
         onSurface: titleColor,
       ),
       textTheme: textTheme,
+      primaryTextTheme:
+          base.primaryTextTheme.apply(fontFamily: AppTypography.fontFamilyHeading),
       extensions: <ThemeExtension<dynamic>>[
         AppTypographyExtension(isWeb: isWeb, isDark: isDark),
       ],
